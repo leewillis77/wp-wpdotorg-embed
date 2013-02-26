@@ -7,4 +7,4 @@ From this:
 ![Post editing](https://raw.github.com/leewillis77/wp-wpdotorg-embed/master/screenshot-1.png)
 
 To this:  
-![Sample output for a plugin](https://raw.github.com/leewillis77/wp-wpdotorg-embed/master/screenshot-1.png)
+![Sample output for a plugin](https://raw.github.com/leewillis77/wp-wpdotorg-embed/master/screenshot-2.png)
