@@ -1,4 +1,4 @@
-wp-wpdotorg-embed
+WordPress WP.ORG plugin embed
 =================
 
-WordPress WP.ORG plugin embed
+A WordPress plugin that allows you to embed realtime information about plugins from WordPress.org into posts and pages simply by pasting in the URL to the plugin into your post.
