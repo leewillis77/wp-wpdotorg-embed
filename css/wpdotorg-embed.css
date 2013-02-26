@@ -1,6 +1,6 @@
 .wpdotorg-embed { 
 	padding: 0.5em 2em 0.5em 4em;
-	background-color: #dcdcdc;
+	background-color: #f9f9fc;
 	width: 80%;
 	margin: auto;
 	margin-bottom: 1em;
@@ -11,3 +11,4 @@
 	-moz-box-shadow: 2px 2px 2px #ddd;
 	box-shadow: 2px 2px 2px #ddd;
 }
+
