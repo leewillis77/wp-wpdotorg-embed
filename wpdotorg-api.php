@@ -39,7 +39,7 @@ class wpdotorg_api {
 	 * @return int          The revised timeout setting
 	 */
 	function http_request_timeout ( $seconds ) {
-		return 10;
+		return $seconds < 10 ? 10 : $seconds;
 	}
 
 
