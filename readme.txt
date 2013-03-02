@@ -1,14 +1,14 @@
-=== WordPress.org Plugin Information Embed ===
+=== WordPress.org Plugin/Theme Information Embed ===
 Contributors: leewillis77
 Donate link: http://www.leewillis.co.uk/wordpress-plugins/?utm_source=wordpress&utm_medium=www&utm_campaign=github-embed
-Tags: plugin information, embed, oembed
+Tags: plugin information, theme, embed, oembed
 Requires at least: 3.5
 Tested up to: 3.5.1
 Stable tag: 1.0
 
 == Description ==
 
-A WordPress plugin that allows you to embed realtime information about plugins from WordPress.org into posts and pages simply by pasting in the URL to the plugin into your post or page.
+A WordPress plugin that allows you to embed realtime information about plugins or themes from WordPress.org into posts and pages simply by pasting in the URL to the plugin into your post or page.
 
 The main development is all going on on [GitHub](https://github.com/leewillis77/wp-wpdotorg-embed).
 
@@ -16,7 +16,7 @@ The main development is all going on on [GitHub](https://github.com/leewillis77/
 
 1. Upload the plugin to the `/wp-content/plugins/` directory
 2. Activate the plugin through the 'Plugins' menu in WordPress
-3. Paste a WordPress.org plugin url into your post or page
+3. Paste a WordPress.org plugin or theme url into your post or page
 
 == Frequently Asked Questions ==
 
@@ -25,6 +25,10 @@ Not yet, we're hoping to add templating - [all contributions welcome](https://gi
 
 
 == Changelog ==
+
+= 1.1 =
+
+* Add support for themes.
 
 = 1.0 =
 
