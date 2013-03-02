@@ -205,7 +205,7 @@ class wpdotorg_embed {
 		}
 
 		if ( ! empty ( $plugin->downloaded ) ) {
-			$stats .= '<li>Downloaded '.esc_html($plugin->downloaded).' times</li>';
+			$stats .= '<li>Downloaded ' . esc_html( number_format_i18n( $plugin->downloaded ) ) . ' times</li>';
 		}
 
 		if ( ! empty ( $stats ) ) {
@@ -257,7 +257,7 @@ class wpdotorg_embed {
 		}
 
 		if ( ! empty ( $theme->downloaded ) ) {
-			$stats .= '<li>Downloaded '.esc_html($theme->downloaded).' times</li>';
+			$stats .= '<li>Downloaded ' . esc_html( number_format_i18n( $plugin->downloaded ) ) . ' times</li>';
 		}
 
 		if ( ! empty ( $stats ) ) {
