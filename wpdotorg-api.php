@@ -110,6 +110,8 @@ class wpdotorg_api {
 
 		$results = $this->call_api ( "http://api.wordpress.org/plugins/info/1.0/", 'plugin_information', $args );
 
+		$this->log ( "get_plugin ( $slug )\n".print_r($results,1), WPDODEBUG_RESP );
+
 		return maybe_unserialize ( $results['body'] );
 
 	}
