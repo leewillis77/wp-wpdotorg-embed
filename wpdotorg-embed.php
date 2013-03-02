@@ -89,6 +89,7 @@ class wpdotorg_embed {
 		$key = $this->get_key();
 		$oembed_url = add_query_arg ( array ( 'wpdotorg_oembed' => $key ), $oembed_url);
 		wp_oembed_add_provider ( '#https?://wordpress.org/extend/plugins/.*/?#i', $oembed_url, true );
+		wp_oembed_add_provider ( '#https?://wordpress.org/extend/themes/.*/?#i', $oembed_url, true );
 
 	}
 
@@ -149,21 +150,28 @@ class wpdotorg_embed {
 			die ( 'Only json here, probably #blamenacin' );
 		}
 
-		preg_match ( '#https?://wordpress.org/extend/plugins/([^/]*)/?$#i', $url, $matches );
+		if ( preg_match ( '#https?://wordpress.org/extend/plugins/([^/]*)/?$#i', $url, $matches ) ) {
 
-		if ( ! $url || empty ( $matches[1] ) ) {
-			header ( 'HTTP/1.0 404 Not Found' );
+			$this->oembed_wpdotorg_plugin ( $matches[1] );
+
+		} elseif ( preg_match ( '#https?://wordpress.org/extend/themes/([^/]*)/?$#i', $url, $matches ) ) {
+
+			$this->oembed_wpdotorg_theme ( $matches[1] );
+
+		} else {
+
+        	header ( 'HTTP/1.0 404 Not Found' );
 			die ( 'Mike Little is lost, and afraid' );
+
 		}
 
-		$this->oembed_wpdotorg_plugin ( $matches[1] );
 
 	}
 
 
 
 	/**
-	 * Retrieve the information from wpdotorg for a repo, and
+	 * Retrieve the information from wpdotorg for a plugin, and
 	 * output it as an oembed response
 	 */
 	private function oembed_wpdotorg_plugin ( $slug ) {
@@ -212,7 +220,61 @@ class wpdotorg_embed {
 
 	}
 
+
+
+	/**
+	 * Retrieve the information from wpdotorg for a theme, and
+	 * output it as an oembed response
+	 */
+	private function oembed_wpdotorg_theme ( $slug ) {
+
+		$theme = $this->api->get_theme ( $slug );
+
+		$response = new stdClass();
+		$response->type = 'rich';
+		$response->width = '10';
+		$response->height = '10';
+		$response->version = '1.0';
+		$response->title = $theme->description;
+		$response->html = '<div class="wpdotorg-embed wpdotorg-embed-theme">';
+
+		// @TODO This should all be templated
+		$response->html .= '<p><a href="http://wordpress.org/extend/themes/'.esc_attr($slug).'" target="_blank"><strong>'.esc_html($theme->name)."</strong></a><br/>";
+		if ( ! empty ( $theme->author ) )
+		    $response->html .= 'by <span class="wpdotorg-embed-theme-author">'.wp_kses_post($theme->author).'</span></p>';
+
+		if ( ! empty ( $theme->sections['description'] ) )
+			$response->html .= '<p class="wpdotorg-embed-theme-description">'.wp_kses_post($theme->sections['description']).'</p>';
+
+		$stats = '';
+
+		if ( ! empty ( $theme->version) ) {
+			$stats .= '<li>Current version: '.esc_html($theme->version).'</li>';
+		}
+
+		if ( ! empty ( $theme->rating ) ) {
+			$stats .= '<li>Rating: '.esc_html($theme->rating).' ('.esc_html($theme->num_ratings).' ratings)</li>';
+		}
+
+		if ( ! empty ( $theme->downloaded ) ) {
+			$stats .= '<li>Downloaded '.esc_html($theme->downloaded).' times</li>';
+		}
+
+		if ( ! empty ( $stats ) ) {
+			$response->html .= '<p><strong>Stats:</strong></p><ul class="wpdotorg-embed-stats-list">'.$stats.'</ul>';
+		}
+
+		$response->html .= '</div>';
+
+		header ( 'Content-Type: application/json' );
+		echo json_encode ( $response );
+		die();
+
+	}
+
 }
+
+
 
 require_once ( 'wpdotorg-api.php' );
 

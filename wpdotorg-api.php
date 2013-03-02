@@ -119,15 +119,15 @@ class wpdotorg_api {
 
 
 	/**
-	 * Get plugin information from the WP.org API
-	 * @param  string $slug       The plugin slug
+	 * Get theme information from the WP.org API
+	 * @param  string $slug       The theme slug
 	 * @return object             The response from the WP.org API
 	 */
-	public function get_plugin ( $slug ) {
+	public function get_theme ( $slug ) {
 
-		$this->log ( "get_plugin ( $slug )", WPDODEBUG_CALL );
+		$this->log ( "get_theme ( $slug )", WPDODEBUG_CALL );
 
-		$plugin = trim ( $plugin, '/' );
+		$theme = trim ( $theme, '/' );
 
 		$args = new stdClass();
 		$args->slug = $slug;
@@ -152,7 +152,9 @@ class wpdotorg_api {
 		                       'last_updated'
 		                       );
 
-		$results = $this->call_api ( "http://api.wordpress.org/plugins/info/1.0/", 'plugin_information', $args );
+		$results = $this->call_api ( "http://api.wordpress.org/themes/info/1.0/", 'theme_information', $args );
+
+		$this->log ( "get_theme ( $slug )\n".print_r($results,1), WPDODEBUG_CALL );
 
 		return maybe_unserialize ( $results['body'] );
 
