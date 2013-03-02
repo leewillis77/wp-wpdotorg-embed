@@ -33,7 +33,7 @@ Author URI: http://www.leewillis.co.uk/
 
 /**
  * This class handles being the oEmbed provider in terms of registering the URLs that
- * we can embed, and handling the actual oEmbed calls. It relies on the WP.org API 
+ * we can embed, and handling the actual oEmbed calls. It relies on the WP.org API
  * class to retrieve the information from WordPress.org
  * @uses class wpdotorg_api
  */
@@ -56,7 +56,7 @@ class wpdotorg_embed {
 		add_action ( 'init', array ( $this, 'register_oembed_handler' ) );
 		add_action ( 'init', array ( $this, 'maybe_handle_oembed' ) );
 		add_action ( 'wp_enqueue_scripts', array ( $this, 'enqueue_styles' ) );
-		
+
 		// @TODO i18n
 
 	}
@@ -71,7 +71,7 @@ class wpdotorg_embed {
 
 		wp_register_style ( 'wpdotorg-embed', plugins_url(basename(dirname(__FILE__)).'/css/wpdotorg-embed.css' ) );
         wp_enqueue_style ( 'wpdotorg-embed' );
-	
+
 	}
 
 
@@ -102,7 +102,7 @@ class wpdotorg_embed {
 	private function get_key() {
 
 		$key = get_option ( 'wpdotorg_oembed_key' );
-		
+
 		if ( ! $key ) {
 			$key = md5 ( time() . rand ( 0,65535 ) );
 			add_option ( 'wpdotorg_oembed_key', $key, '', 'yes' );
@@ -182,7 +182,7 @@ class wpdotorg_embed {
 		$response->html .= '<p><a href="http://wordpress.org/extend/plugins/'.esc_attr($slug).'" target="_blank"><strong>'.esc_html($plugin->name)."</strong></a><br/>";
 		if ( ! empty ( $plugin->author ) )
 		    $response->html .= 'by <span class="wpdotorg-embed-plugin-author">'.wp_kses_post($plugin->author).'</span></p>';
-		
+
 		if ( ! empty ( $plugin->sections['description'] ) )
 			$response->html .= '<p class="wpdotorg-embed-plugin-description">'.wp_kses_post($plugin->sections['description']).'</p>';
 
@@ -199,7 +199,7 @@ class wpdotorg_embed {
 		if ( ! empty ( $plugin->downloaded ) ) {
 			$stats .= '<li>Downloaded '.esc_html($plugin->downloaded).' times</li>';
 		}
-		
+
 		if ( ! empty ( $stats ) ) {
 			$response->html .= '<p><strong>Stats:</strong></p><ul class="wpdotorg-embed-stats-list">'.$stats.'</ul>';
 		}
