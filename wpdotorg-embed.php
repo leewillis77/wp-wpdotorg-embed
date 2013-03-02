@@ -205,7 +205,7 @@ class wpdotorg_embed {
 		}
 
 		if ( ! empty ( $plugin->downloaded ) ) {
-			$stats .= '<li>Downloaded '.esc_html($plugin->downloaded).' times</li>';
+			$stats .= '<li>Downloaded '.esc_html( number_format( $plugin->downloaded, 0, '', apply_filters( 'wpdotorg_thousands_sep', ',' ) ) ).' times</li>';
 		}
 
 		if ( ! empty ( $stats ) ) {
