@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 
 // 0 - none
@@ -44,10 +44,17 @@ class wpdotorg_api {
 
 
 
+	/**
+	 * Call the WP.org API for the request
+	 * @param  string $api_url The API endpoint URL to call
+	 * @param  string $action  The action we're performing at that URL
+	 * @param  object $req     The request data
+	 * @return mixed           The response from the API
+	 */
 	private function call_api ( $api_url, $action, $req ) {
 
 		$args = array ( 'user-agent' => 'WordPress WPDotOrg oEmbed plugin - https://github.com/leewillis77/wp-wpdotorg-embed');
-		
+
 		$this->log ( __FUNCTION__." : $url\nACTION: ".print_r($action,1)."\nDATA: ".print_r(serialize($req),1), WPDODEBUG_CALL );
 
 		$results = wp_remote_post ( $api_url, array ( 'body' => array ( 'action' => $action, 'request' => serialize ( $req ) ) ) );
@@ -97,7 +104,7 @@ class wpdotorg_api {
 		                       'author_profile',
 		                       'homepage',
 		                       'contributors',
-		                       'added', 
+		                       'added',
 		                       'last_updated'
 		                       );
 
@@ -106,9 +113,56 @@ class wpdotorg_api {
 		return maybe_unserialize ( $results['body'] );
 
 	}
-	
 
 
+
+	/**
+	 * Get plugin information from the WP.org API
+	 * @param  string $slug       The plugin slug
+	 * @return object             The response from the WP.org API
+	 */
+	public function get_plugin ( $slug ) {
+
+		$this->log ( "get_plugin ( $slug )", WPDODEBUG_CALL );
+
+		$plugin = trim ( $plugin, '/' );
+
+		$args = new stdClass();
+		$args->slug = $slug;
+		$args->fields = array (
+		                       'version',
+		                       'author',
+		                       'requires',
+		                       'tested',
+		                       'downloaded',
+		                       'rating',
+		                       'num_ratings',
+		                       'sections',
+		                       'download_link',
+		                       'description',
+		                       'short_description',
+		                       'name',
+		                       'slug',
+		                       'author_profile',
+		                       'homepage',
+		                       'contributors',
+		                       'added',
+		                       'last_updated'
+		                       );
+
+		$results = $this->call_api ( "http://api.wordpress.org/plugins/info/1.0/", 'plugin_information', $args );
+
+		return maybe_unserialize ( $results['body'] );
+
+	}
+
+
+
+	/**
+	 * Internal logging function
+	 * @param  string $msg   The message to log
+	 * @param  int $level    The level of this message
+	 */
 	private function log ( $msg, $level ) {
 		if ( WPDO_API_LEVEL >= $level ) {
 			error_log ( "[WPDOE$level]: ".$msg );
