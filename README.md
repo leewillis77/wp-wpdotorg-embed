@@ -8,3 +8,5 @@ From this:
 
 To this:
 ![Sample output for a plugin](https://raw.github.com/leewillis77/wp-wpdotorg-embed/master/screenshot-2.png)
+
+Plugin development happens here, but releases are also available on [WordPress.org](http://wordpress.org/extend/plugins/wporg-plugin-embed/)

@@ -4,7 +4,7 @@ Donate link: http://www.leewillis.co.uk/wordpress-plugins/?utm_source=wordpress&
 Tags: plugin information, theme, embed, oembed
 Requires at least: 3.5
 Tested up to: 3.5.1
-Stable tag: 1.0
+Stable tag: 1.1
 
 == Description ==
 
@@ -28,7 +28,7 @@ Not yet, we're hoping to add templating - [all contributions welcome](https://gi
 
 = 1.1 =
 
-* Add support for themes.
+* Add support for themes. Hat tip to [zgani](http://profiles.wordpress.org/zgani) for nudging me to release the update!
 
 = 1.0 =
 
