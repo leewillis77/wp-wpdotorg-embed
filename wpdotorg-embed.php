@@ -4,7 +4,7 @@
 Plugin Name: WP.org Embed
 Plugin URI: http://www.leewillis.co.uk/wordpress-plugins
 Description: Paste the URL to a WordPress.org plugin into your posts or pages, and have the plugin information pulled in and displayed automatically
-Version: 1.1
+Version: 1.2
 Author: Lee Willis
 Author URI: http://www.leewillis.co.uk/
 */
