@@ -2,16 +2,16 @@
 
 
 // 0 - none
-define ( 'WPDODEBUG_NONE', 0 );
+define( 'WPDODEBUG_NONE', 0 );
 
 // 1 - call logging only
-define ( 'WPDODEBUG_CALL', 1 );
+define( 'WPDODEBUG_CALL', 1 );
 
 // 2 - calls, and responses
-define ( 'WPDODEBUG_RESP', 2 );
+define( 'WPDODEBUG_RESP', 2 );
 
 // Selected debug level
-define ( 'WPDO_API_LEVEL', WPDODEBUG_NONE );
+define( 'WPDO_API_LEVEL', WPDODEBUG_NONE );
 
 
 
@@ -26,9 +26,7 @@ class wpdotorg_api {
 	 * Limit chance of timeouts
 	 */
 	function __construct() {
-
-		add_filter ( 'http_request_timeout', array ( $this, 'http_request_timeout' ) );
-
+		add_filter( 'http_request_timeout', array( $this, 'http_request_timeout' ) );
 	}
 
 
@@ -38,7 +36,7 @@ class wpdotorg_api {
 	 * @param  int $seconds The current timeout setting
 	 * @return int          The revised timeout setting
 	 */
-	function http_request_timeout ( $seconds ) {
+	function http_request_timeout( $seconds ) {
 		return $seconds < 10 ? 10 : $seconds;
 	}
 
@@ -51,21 +49,21 @@ class wpdotorg_api {
 	 * @param  object $req     The request data
 	 * @return mixed           The response from the API
 	 */
-	private function call_api ( $api_url, $action, $req ) {
+	private function call_api( $api_url, $action, $req ) {
 
-		$args = array ( 'user-agent' => 'WordPress WPDotOrg oEmbed plugin - https://github.com/leewillis77/wp-wpdotorg-embed');
+		$args = array( 'user-agent' => 'WordPress WPDotOrg oEmbed plugin - https://github.com/leewillis77/wp-wpdotorg-embed');
 
-		$this->log ( __FUNCTION__." : $url\nACTION: ".print_r($action,1)."\nDATA: ".print_r(serialize($req),1), WPDODEBUG_CALL );
+		$this->log( __FUNCTION__ . " : $url\nACTION: " . print_r( $action, 1 ) . "\nDATA: " . print_r( serialize( $req ), 1 ), WPDODEBUG_CALL );
 
-		$results = wp_remote_post ( $api_url, array ( 'body' => array ( 'action' => $action, 'request' => serialize ( $req ) ) ) );
+		$results = wp_remote_post( $api_url, array( 'body' => array( 'action' => $action, 'request' => serialize( $req ) ) ) );
 
-		$this->log ( __FUNCTION__." : ".print_r($results,1), WPDODEBUG_RESP );
+		$this->log( __FUNCTION__ . " : " . print_r( $results, 1 ), WPDODEBUG_RESP );
 
 		if ( is_wp_error( $results ) ||
-		    ! isset ( $results['response']['code'] ) ||
-		    $results['response']['code'] != '200' ) {
-			header ( 'HTTP/1.0 404 Not Found' );
-			die ( 'Mike Little is lost, and afraid' );
+		     ! isset( $results['response']['code'] ) ||
+		     $results['response']['code'] != '200' ) {
+			header( 'HTTP/1.0 404 Not Found' );
+			die( 'Mike Little is lost, and afraid' );
 		}
 
 		return $results;
@@ -79,15 +77,15 @@ class wpdotorg_api {
 	 * @param  string $slug       The plugin slug
 	 * @return object             The response from the WP.org API
 	 */
-	public function get_plugin ( $slug ) {
+	public function get_plugin( $slug ) {
 
-		$this->log ( "get_plugin ( $slug )", WPDODEBUG_CALL );
+		$this->log( "get_plugin( $slug )", WPDODEBUG_CALL );
 
-		$plugin = trim ( $plugin, '/' );
+		$plugin = trim( $plugin, '/' );
 
 		$args = new stdClass();
 		$args->slug = $slug;
-		$args->fields = array (
+		$args->fields = array(
 		                       'version',
 		                       'author',
 		                       'requires',
@@ -105,14 +103,14 @@ class wpdotorg_api {
 		                       'homepage',
 		                       'contributors',
 		                       'added',
-		                       'last_updated'
+		                       'last_updated',
 		                       );
 
-		$results = $this->call_api ( "http://api.wordpress.org/plugins/info/1.0/", 'plugin_information', $args );
+		$results = $this->call_api( 'http://api.wordpress.org/plugins/info/1.0/', 'plugin_information', $args );
 
-		$this->log ( "get_plugin ( $slug )\n".print_r($results,1), WPDODEBUG_RESP );
+		$this->log( "get_plugin( $slug )\n" . print_r( $results, 1 ), WPDODEBUG_RESP );
 
-		return maybe_unserialize ( $results['body'] );
+		return maybe_unserialize( $results['body'] );
 
 	}
 
@@ -123,15 +121,15 @@ class wpdotorg_api {
 	 * @param  string $slug       The theme slug
 	 * @return object             The response from the WP.org API
 	 */
-	public function get_theme ( $slug ) {
+	public function get_theme( $slug ) {
 
-		$this->log ( "get_theme ( $slug )", WPDODEBUG_CALL );
+		$this->log( "get_theme( $slug )", WPDODEBUG_CALL );
 
-		$theme = trim ( $theme, '/' );
+		$theme = trim( $theme, '/' );
 
 		$args = new stdClass();
 		$args->slug = $slug;
-		$args->fields = array (
+		$args->fields = array(
 		                       'version',
 		                       'author',
 		                       'requires',
@@ -149,14 +147,14 @@ class wpdotorg_api {
 		                       'homepage',
 		                       'contributors',
 		                       'added',
-		                       'last_updated'
+		                       'last_updated',
 		                       );
 
-		$results = $this->call_api ( "http://api.wordpress.org/themes/info/1.0/", 'theme_information', $args );
+		$results = $this->call_api( 'http://api.wordpress.org/themes/info/1.0/', 'theme_information', $args );
 
-		$this->log ( "get_theme ( $slug )\n".print_r($results,1), WPDODEBUG_CALL );
+		$this->log( "get_theme( $slug )\n" . print_r( $results, 1 ), WPDODEBUG_CALL );
 
-		return maybe_unserialize ( $results['body'] );
+		return maybe_unserialize( $results['body'] );
 
 	}
 
@@ -167,9 +165,9 @@ class wpdotorg_api {
 	 * @param  string $msg   The message to log
 	 * @param  int $level    The level of this message
 	 */
-	private function log ( $msg, $level ) {
+	private function log( $msg, $level ) {
 		if ( WPDO_API_LEVEL >= $level ) {
-			error_log ( "[WPDOE$level]: ".$msg );
+			error_log( "[WPDOE$level]: ".$msg );
 		}
 	}
 
