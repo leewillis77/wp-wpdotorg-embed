@@ -53,7 +53,7 @@ class wpdotorg_api {
 
 		$args = array( 'user-agent' => 'WordPress WPDotOrg oEmbed plugin - https://github.com/leewillis77/wp-wpdotorg-embed');
 
-		$this->log( __FUNCTION__ . " : $url\nACTION: " . print_r( $action, 1 ) . "\nDATA: " . print_r( serialize( $req ), 1 ), WPDODEBUG_CALL );
+		$this->log( __FUNCTION__ . " : $api_url\nACTION: " . print_r( $action, 1 ) . "\nDATA: " . print_r( serialize( $req ), 1 ), WPDODEBUG_CALL );
 
 		$results = wp_remote_post( $api_url, array( 'body' => array( 'action' => $action, 'request' => serialize( $req ) ) ) );
 
@@ -81,10 +81,10 @@ class wpdotorg_api {
 
 		$this->log( "get_plugin( $slug )", WPDODEBUG_CALL );
 
-		$plugin = trim( $plugin, '/' );
+		$plugin = trim( $slug, '/' );
 
 		$args = new stdClass();
-		$args->slug = $slug;
+		$args->slug = $plugin;
 		$args->fields = array(
 		                       'version',
 		                       'author',
@@ -125,10 +125,10 @@ class wpdotorg_api {
 
 		$this->log( "get_theme( $slug )", WPDODEBUG_CALL );
 
-		$theme = trim( $theme, '/' );
+		$theme = trim( $slug, '/' );
 
 		$args = new stdClass();
-		$args->slug = $slug;
+		$args->slug = $theme;
 		$args->fields = array(
 		                       'version',
 		                       'author',
