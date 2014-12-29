@@ -269,7 +269,7 @@ class wpdotorg_embed {
 		$response->width = '10';
 		$response->height = '10';
 		$response->version = '1.0';
-		$response->title = $theme->description;
+		$response->title = $theme->sections['description'];
 		$response->html = '<div class="wpdotorg-embed wpdotorg-embed-theme">';
 
 		// @TODO This should all be templated
