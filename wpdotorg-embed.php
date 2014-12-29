@@ -4,7 +4,7 @@
 Plugin Name: WP.org Embed
 Plugin URI: http://www.leewillis.co.uk/wordpress-plugins
 Description: Paste the URL to a WordPress.org plugin into your posts or pages, and have the plugin information pulled in and displayed automatically
-Version: 1.3
+Version: 1.4
 Author: Lee Willis
 Author URI: http://www.leewillis.co.uk/
 */
@@ -169,7 +169,6 @@ class wpdotorg_embed {
 	 * Handle an oembed request
 	 */
 	public function handle_oembed() {
-
 		// Check this request is valid
 		if ( $_GET['wpdotorg_oembed'] != $this->get_key() ) {
             header( 'HTTP/1.0 403 Forbidden' );

@@ -3,8 +3,8 @@ Contributors: leewillis77
 Donate link: http://www.leewillis.co.uk/wordpress-plugins/?utm_source=wordpress&utm_medium=www&utm_campaign=github-embed
 Tags: plugin information, theme, embed, oembed
 Requires at least: 3.5
-Tested up to: 3.5.1
-Stable tag: 1.3
+Tested up to: 4.1
+Stable tag: 1.4
 
 == Description ==
 
@@ -26,7 +26,11 @@ Not yet, we're hoping to add templating - [all contributions welcome](https://gi
 
 == Changelog ==
 
-= 1.3 = 
+= 1.4 =
+
+* Fix some undefined warning errors - props kanakiyajay
+
+= 1.3 =
 
 * Support new-style plugin repo URLs which don't include embed/
 
