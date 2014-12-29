@@ -119,7 +119,6 @@ class wpdotorg_embed {
 	 * @return array            The list, with our new provider added
 	 */
 	public function register_oembed_handler() {
-
 		$oembed_url = home_url();
 		$key = $this->get_key();
 		$oembed_url = add_query_arg( array( 'wpdotorg_oembed' => $key ), $oembed_url );
@@ -216,7 +215,7 @@ class wpdotorg_embed {
 		$response->width = '10';
 		$response->height = '10';
 		$response->version = '1.0';
-		$response->title = $plugin->description;
+		$response->title = $plugin->sections['description'];
 		$response->html = '<div class="wpdotorg-embed wpdotorg-embed-plugin">';
 
 		// @TODO This should all be templated
