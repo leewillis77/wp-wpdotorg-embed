@@ -21,7 +21,7 @@ The main development is all going on on [GitHub](https://github.com/leewillis77/
 == Frequently Asked Questions ==
 
 = Can I change the layout? =
-Not yet, we're hoping to add templating - [all contributions welcome](https://github.com/leewillis77/wp-wpdotorg-oembed)!
+Not yet, we're hoping to add templating - [all contributions welcome](https://github.com/leewillis77/wp-wpdotorg-embed)!
 
 
 == Changelog ==
